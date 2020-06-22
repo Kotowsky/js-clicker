@@ -1,1 +1,72 @@
-a
+:root
+{
+	--main-color: #5A7D7C;
+	
+	--color-1: #DADFF7;
+	--color-2: #232C33;
+	--color-3: #A0C1D1;
+	--color-4: #B5B2C2;
+}
+
+*
+{
+	box-sizing: border-box;
+	
+	padding: 0;
+	margin: 0;
+}
+
+html, body
+{
+	font-family: sans-serif;
+}
+
+.container
+{
+	background: var( --main-color );
+	
+	min-width: 800px;
+	min-height: 600px;
+	
+	width: 100vw;
+	height: 100vh;
+	
+	display: grid;
+	
+	grid-template-columns: 3fr 3fr 1fr;
+	grid-template-rows: 2fr 12fr 1fr;
+	
+	gap: 5px;
+}
+
+.top
+{
+	background: var( --color-1 );
+
+	grid-column: 1 / 4;
+	grid-row: 1;
+}
+
+.main
+{
+	background: var( --color-1 );
+	
+	grid-column: 1 / 3;
+	grid-row: 2;
+}
+
+.menu
+{
+	background: var( --color-1 );
+	
+	grid-column: 3;
+	grid-row: 2;
+}
+
+.bottom
+{
+	background: var( --color-1 );
+	
+	grid-column: 1 / 4;
+	grid-row: 3;
+}
