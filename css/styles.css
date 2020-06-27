@@ -53,6 +53,53 @@ html, body
 	
 	grid-column: 1 / 3;
 	grid-row: 2;
+	
+	position: relative;
+}
+
+.main-header
+{
+	background: yellow;
+	
+	display: flex;
+	flex-direction: column;
+	
+	align-items: center;
+	justify-content: center;
+	
+	width: 90%;	
+	min-height: 15%;
+	
+	position: absolute;
+	
+	margin-top: 10px;
+}
+
+.main-header .header-item
+{
+	background: green;
+	
+	margin: 5px;
+	padding: 2px;
+	
+	min-width: 25%;
+}
+
+.main-header .header-item p
+{
+	display: inline;
+}
+
+.rect
+{
+	background: yellow;
+	
+	cursor: pointer;
+	
+	width: 100px;	
+	height: 100px;
+	
+	position: absolute;
 }
 
 .menu
@@ -69,4 +116,22 @@ html, body
 	
 	grid-column: 1 / 4;
 	grid-row: 3;
+}
+
+.centered-horizontally
+{
+	margin-left: auto;
+	margin-right: auto;	
+	
+	left: 0;
+	right: 0;
+}
+
+.centered-vertically
+{
+	margin-top: auto;
+	margin-bottom: auto;
+	
+	top: 0;
+	bottom: 0;
 }
