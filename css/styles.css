@@ -108,6 +108,29 @@ html, body
 	
 	grid-column: 3;
 	grid-row: 2;
+	
+	display: flex;
+	flex direction:: colunm;
+}
+.menu .upgrade
+{
+	width: 100%;
+	height: 100%;
+	
+	
+}
+
+.menu .upgrade #upgrade1, #upgrade2, #upgrade3, #upgrade4, #upgrade5
+{
+	background: var(--color-3);
+	
+	width: 100%;
+	
+	height: 19.6%;
+
+	
+	margin: 2px;
+	
 }
 
 .bottom
