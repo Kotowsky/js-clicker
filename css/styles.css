@@ -148,6 +148,8 @@ html, body
 
 	margin: 2px 0;
 	padding: 2px;
+	
+	opacity: 0.2;
 }
 
 .upgrade .upgride-right
