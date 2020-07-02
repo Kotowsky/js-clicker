@@ -129,7 +129,7 @@ html, body
 }
 
 
-.achievement-container
+.achievement-row
 {
 	width: 100%;
 	height: auto;
@@ -145,7 +145,7 @@ html, body
 	background: yellow;
 }
 
-.achievement-container .achievement
+.achievement-row .achievement
 {
 	background: var(--color-3);
 	
@@ -184,7 +184,7 @@ html, body
 	opacity: 0.2;
 }
 
-.upgrade .upgride-right
+.upgrade .upgrade-right
 {
 	display: flex;
 	flex-direction: column;

@@ -16,23 +16,27 @@ var upgrades = [
 { id: "upgrade-2", name: "upgrade-3", cost: 200, value: 5, quantity: 0 }, 
 { id: "upgrade-3", name: "upgrade-4", cost: 500, value: 10, quantity: 0 },
 { id: "upgrade-4", name: "upgrade-5", cost: 1000, value: 20, quantity: 0 },
+{ id: "upgrade-5", name: "upgrade-6", cost: 5000, value: 50, quantity: 0 },
 ];
 
 var achievement = [ 
-{ id: "achievement-0", name: "achievement-1",  value: 1 }, 
-{ id: "achievement-1", name: "achievement-2",  value: 2  },
-{ id: "achievement-2", name: "achievement-3",  value: 5  }, 
-{ id: "achievement-3", name: "achievement-4",  value: 10  },
-{ id: "achievement-4", name: "achievement-5",  value: 20  },
+{ id: "achievement-0", name: "achievement-1",  value: 1, cost: 100, possible: false }, 
+{ id: "achievement-1", name: "achievement-2",  value: 2, cost: 200, possible: false },
+{ id: "achievement-2", name: "achievement-3",  value: 5, cost: 500, possible: false }, 
+{ id: "achievement-3", name: "achievement-4",  value: 10, cost: 1000, possible: false },
+{ id: "achievement-4", name: "achievement-5",  value: 20, cost: 2500, possible: false },
 ];
 
 var randomClicker = { baseValue: 5, baseDelay: 120000, delay: 180000 };
 
 window.onload = init;
 
+
 function init()
 {
 	//loadLocalStorage();
+	
+	createUpgrades();
 	
 	mainInterval = setInterval( mainLoop, 1000 / framerate );
 	saveInterval = setInterval( saveLocalStorage, saveFrequency );
@@ -55,12 +59,61 @@ function updateTitle()
 	document.title = Math.round( pointsTotal ) + " points - " + gameTitle;
 }
 
+function createUpgrades()
+{
+	for( let upgradeIndex = 0; upgradeIndex < upgrades.length; upgradeIndex++ )
+	{
+		let upgradeContainer = document.getElementById( 'upgrade-container-0' );
+		
+		let upgrade = createUpgrade( upgradeIndex );
+		upgradeContainer.appendChild( upgrade );
+	}
+}
+
+function createUpgrade( upgradeIndex )
+{
+	let upgrade = document.createElement( 'div' );
+	upgrade.setAttribute( 'id', 'upgrade-' + upgradeIndex );
+	upgrade.setAttribute( 'class', 'upgrade');
+	
+	let upgradeInfo = document.createElement( 'div' );
+	upgradeInfo.setAttribute( 'class', 'upgrade-info' );
+	
+	let upgradeName = document.createElement( 'p' );
+	upgradeName.setAttribute( 'class', 'upgrade-name' );
+	
+	let upgradeCost = document.createElement( 'p' );
+	upgradeCost.setAttribute( 'class', 'upgrade-cost' );
+	
+	upgradeInfo.appendChild( upgradeName );
+	upgradeInfo.appendChild( upgradeCost );
+	
+	let upgradeRight = document.createElement( 'div' );
+	upgradeRight.setAttribute( 'class', 'upgrade-right' );
+	
+	let upgradePurchaseButon = document.createElement( 'div' );
+	upgradePurchaseButon.setAttribute( 'class', 'purchase-button' );
+	upgradePurchaseButon.innerHTML = 'buy';
+	
+	let upgradeQuantity = document.createElement( 'div' );
+	upgradeQuantity.setAttribute( 'class', 'upgrade-quantity' );
+	
+	upgradeRight.appendChild( upgradePurchaseButon );
+	upgradeRight.appendChild( upgradeQuantity );
+	
+	upgrade.appendChild( upgradeInfo );
+	upgrade.appendChild( upgradeRight );
+	
+	return upgrade;
+}
+
+
 function displayUpgrades()
 {
 	for( let upgradeIndex = 0; upgradeIndex < upgrades.length; upgradeIndex++ )
 	{
 		let upgrade = document.getElementById( 'upgrade-' + upgradeIndex );
-	
+		
 		upgrade.querySelector('.upgrade-name').innerHTML = upgrades[ upgradeIndex ].name;
 		upgrade.querySelector('.upgrade-cost').innerHTML = upgrades[ upgradeIndex ].cost;
 		upgrade.querySelector('.upgrade-quantity').innerHTML = upgrades[ upgradeIndex ].quantity;
@@ -74,6 +127,21 @@ function displayUpgrades()
 			hideUpgrade( upgradeIndex );
 		}
 	}
+}
+
+function createAchievements()
+{
+
+}
+
+function createAchievement( achievementIndex )
+{
+	
+}
+
+function displayAchievements()
+{
+	
 }
 
 function purchaseUpgrade( upgradeIndex, quantity )
