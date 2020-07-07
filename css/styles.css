@@ -128,6 +128,13 @@ html, body
 	justify-content: flex-start;
 }
 
+.achievement-container
+{
+	min-width: 250px;
+	
+	display: flex;
+	flex-direction: column;
+}
 
 .achievement-row
 {
@@ -145,11 +152,11 @@ html, body
 	background: yellow;
 }
 
-.achievement-row .achievement
+.achievement
 {
 	background: var(--color-3);
 	
-	display: flex;
+	display: none;
 	flex-direction: row;
 	
 	width: 48px;
@@ -157,6 +164,32 @@ html, body
 	
 	margin: 1px;
 	padding: 2px;
+	
+	position: relative;
+	
+	cursor: pointer;
+}
+
+.achievement-hidden
+{
+	background: inherit;
+	
+	display: none;
+	flex-direction: column;
+	
+	width: 240px;
+	height: inherit;
+	
+	position: absolute;
+	
+	padding: 4px;
+	
+	left: -240px;
+}
+
+.achievement:hover .achievement-hidden
+{
+	display: flex;
 }
 
 .upgrade-container
@@ -168,7 +201,7 @@ html, body
 	flex-direction: column;
 }
 
-.upgrade-container .upgrade
+.upgrade
 {
 	background: var(--color-3);
 	

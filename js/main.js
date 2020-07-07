@@ -1,6 +1,6 @@
 var gameTitle = "JS-Clicker";
 
-var pointsTotal = 0;
+var pointsTotal = 1000000;
 var pointsPerSecond = 0;
 
 var pointsPerClick = 1;
@@ -19,12 +19,25 @@ var upgrades = [
 { id: "upgrade-5", name: "upgrade-6", cost: 5000, value: 50, quantity: 0 },
 ];
 
-var achievement = [ 
-{ id: "achievement-0", name: "achievement-1",  value: 1, cost: 100, possible: false }, 
-{ id: "achievement-1", name: "achievement-2",  value: 2, cost: 200, possible: false },
-{ id: "achievement-2", name: "achievement-3",  value: 5, cost: 500, possible: false }, 
-{ id: "achievement-3", name: "achievement-4",  value: 10, cost: 1000, possible: false },
-{ id: "achievement-4", name: "achievement-5",  value: 20, cost: 2500, possible: false },
+var achievements = [ 
+
+[
+{ id: "achievement-0", name: "achievement-1",  requirementType: "points-total", requirementValue: 250, rewardType: "points-per-click", rewardValue: 1, cost: 100, purchased: false, available: false }, 
+{ id: "achievement-1", name: "achievement-2",  requirementType: "points-total", requirementValue: 500, rewardType: "points-per-click", rewardValue: 2, cost: 200, purchased: false, available: false },
+{ id: "achievement-2", name: "achievement-3",  requirementType: "points-total", requirementValue: 5000, rewardType: "points-per-click", rewardValue: 5, cost: 500, purchased: false, available: false }, 
+{ id: "achievement-3", name: "achievement-4",  requirementType: "points-total", requirementValue: 10000, rewardType: "points-per-click", rewardValue: 10, cost: 1000, purchased: false, available: false },
+{ id: "achievement-4", name: "achievement-5",  requirementType: "points-total", requirementValue: 20000, rewardType: "points-per-click", rewardValue: 20, cost: 2500, purchased: false, available: false },
+],
+
+[
+{ id: "achievement-5", name: "achievement-5",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 0, rewardValue: 2, cost: 100, purchased: false, available: false }, 
+{ id: "achievement-6", name: "achievement-6",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 1, rewardValue: 2, cost: 200, purchased: false, available: false },
+{ id: "achievement-7", name: "achievement-7",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 2, rewardValue: 1.5, cost: 500, purchased: false, available: false }, 
+{ id: "achievement-8", name: "achievement-8",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 3, rewardValue: 1.5, cost: 10000, purchased: false, available: false },
+{ id: "achievement-9", name: "achievement-9",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 4, rewardValue: 1.5, cost: 25000, purchased: false, available: false },
+{ id: "achievement-10", name: "achievement-10",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 5, rewardValue: 1.5, cost: 50000, purchased: false, available: false },
+],
+
 ];
 
 var randomClicker = { baseValue: 5, baseDelay: 120000, delay: 180000 };
@@ -37,6 +50,7 @@ function init()
 	//loadLocalStorage();
 	
 	createUpgrades();
+	createAchievements();
 	
 	mainInterval = setInterval( mainLoop, 1000 / framerate );
 	saveInterval = setInterval( saveLocalStorage, saveFrequency );
@@ -104,9 +118,22 @@ function createUpgrade( upgradeIndex )
 	upgrade.appendChild( upgradeInfo );
 	upgrade.appendChild( upgradeRight );
 	
+	upgrade.addEventListener( 'click', function() { purchaseUpgrade( upgradeIndex, 1 ) }, false );
+	
 	return upgrade;
 }
 
+function purchaseUpgrade( upgradeIndex, quantity )
+{ 
+	if( pointsTotal >= upgrades[ upgradeIndex ].cost )
+	{
+		upgrades[ upgradeIndex ].quantity += quantity;
+		pointsPerSecond += upgrades[ upgradeIndex ].value;
+		
+		pointsTotal -= upgrades[ upgradeIndex ].cost;
+		upgrades[ upgradeIndex ].cost = Math.round( upgrades[ upgradeIndex ].cost * 1.25 );	
+    }
+}
 
 function displayUpgrades()
 {
@@ -129,31 +156,163 @@ function displayUpgrades()
 	}
 }
 
-function createAchievements()
-{
-
-}
-
-function createAchievement( achievementIndex )
-{
-	
-}
-
 function displayAchievements()
 {
-	
+	for( let achievementRowIndex = 0; achievementRowIndex < achievements.length; achievementRowIndex++ )
+	{
+		for( let achievementIndex = 0; achievementIndex < achievements[ achievementRowIndex ].length; achievementIndex++ )
+		{
+			let achievementElement = document.getElementById( achievements[ achievementRowIndex ][ achievementIndex ].id );
+			
+			if( pointsTotal >= achievements[ achievementRowIndex ][ achievementIndex ].cost && !achievements[ achievementRowIndex ][ achievementIndex ].purchased )
+			{
+				achievementElement.style.display = 'flex';
+				achievements[ achievementRowIndex ][ achievementIndex ].available = true;
+			}
+			
+			if( achievements[ achievementRowIndex ][ achievementIndex ].available = true && checkAchievementRequirements( achievementRowIndex, achievementIndex ) )
+			{
+				achievementElement.style.opacity = 1;
+			}
+			else 
+			{
+				achievementElement.style.opacity = 0.5;
+			}
+		}
+	}
 }
 
-function purchaseUpgrade( upgradeIndex, quantity )
-{ 
-	if( pointsTotal >= upgrades[ upgradeIndex ].cost )
+function createAchievements()
+{  
+	let achievementContainer = document.getElementById( 'achievement-container' );
+	
+	for( let achievementRowIndex = 0; achievementRowIndex < achievements.length; achievementRowIndex++ )
 	{
-		upgrades[ upgradeIndex ].quantity += quantity;
-		pointsPerSecond += upgrades[ upgradeIndex ].value;
+		let achievementRow = createAchievementRow( achievementRowIndex );
+		achievementContainer.appendChild( achievementRow );
+	}
+}
+
+function createAchievementRow( achievementRowIndex )
+{
+	let achievementRow = document.createElement( 'div' );
+	achievementRow.setAttribute( 'id', 'achievement-row-'+ achievementRowIndex );
+	achievementRow.setAttribute( 'class', 'achievement-row' );
+	
+	for( let achievementIndex = 0; achievementIndex < achievements[ achievementRowIndex ].length; achievementIndex++ )
+	{
+		let achievement = createAchievement( achievementRowIndex, achievementIndex );
+		achievementRow.appendChild( achievement );
+	}
+	
+	return achievementRow;
+}
+
+function createAchievement( achievementRowIndex, achievementIndex )
+{
+	let achievement = document.createElement( 'div' );
+	achievement.setAttribute( 'id', achievements[ achievementRowIndex ][ achievementIndex ].id );
+	achievement.setAttribute( 'class', 'achievement' );
+	
+	let achievementHidden = document.createElement( 'div' );
+	achievementHidden.setAttribute( 'class', 'achievement-hidden centered-vertically' );
+	
+	let achievementName = document.createElement( 'p' );
+	achievementName.setAttribute( 'class', 'achievement-name' );
+	achievementName.innerHTML = achievements[ achievementRowIndex ][ achievementIndex ].name;
+	
+	let achievementCost = document.createElement( 'p' );
+	achievementCost.setAttribute( 'class', 'achievement-cost' );
+	achievementCost.innerHTML = achievements[ achievementRowIndex ][ achievementIndex ].cost;
+	
+	achievementHidden.appendChild( achievementName );
+	achievementHidden.appendChild( achievementCost );
+	
+	achievement.appendChild( achievementHidden );
+	
+	achievement.addEventListener( 'click', function() { purchaseAchievement( achievementRowIndex, achievementIndex ) }, false );
+	
+	return achievement;
+}
+
+function purchaseAchievement( achievementRowIndex, achievementIndex )
+{ 
+	if( checkAchievementRequirements( achievementRowIndex, achievementIndex ) )
+	{
+		getAchievementReward( achievementRowIndex, achievementIndex );
+		achievements[ achievementRowIndex ][ achievementIndex ].purchased = true;
 		
-		pointsTotal -= upgrades[ upgradeIndex ].cost;
-		upgrades[ upgradeIndex ].cost = Math.round( upgrades[ upgradeIndex ].cost * 1.25 );	
+		let achievementElement = document.getElementById( achievements[ achievementRowIndex ][ achievementIndex ].id );
+		achievementElement.style.display = 'none';
     }
+}
+
+function checkAchievementRequirements( achievementRowIndex, achievementIndex )
+{
+	switch( achievements[ achievementRowIndex ][ achievementIndex ].requirementType )
+	{
+		case "points-total":
+				return pointsTotal >= achievements[ achievementRowIndex ][ achievementIndex ].requirementValue;
+			break;
+			
+		case "points-per-second":
+				return pointsPerSecond >= achievements[ achievementRowIndex ][ achievementIndex ].requirementValue;
+			break;
+			
+		case "points-per-click":
+				return pointsPerClick >= achievements[ achievementRowIndex ][ achievementIndex ].requirementValue;
+			break;
+			
+		case "upgrade-quantity":
+				let upgradeIndex = achievements[ achievementRowIndex ][achievementIndex].upgradeIndex;
+				return upgrades[ upgradeIndex ].quantity >= achievements[ achievementRowIndex ][achievementIndex].requirementValue;
+			break;	
+			
+		default:
+				console.log( 'not working' );
+			break;
+	}
+}
+
+function getAchievementReward( achievementRowIndex, achievementIndex )
+{
+	switch( achievements[ achievementRowIndex ][ achievementIndex ].rewardType )
+	{
+		case "points-total":
+				pointsTotal += achievements[ achievementRowIndex ][achievementIndex].rewardValue;
+			break;
+			
+		case "points-per-second":
+				pointsPerSecond += achievements[ achievementRowIndex ][achievementIndex].rewardValue;
+			break;
+			
+		case "points-per-click":
+				pointsPerClick += achievements[ achievementRowIndex ][achievementIndex].rewardValue;
+			break;
+			
+		case "upgrade-value-multiplier":
+				let upgradeIndex = achievements[ achievementRowIndex ][achievementIndex].upgradeIndex;
+				upgrades[ upgradeIndex ].value *= achievements[ achievementRowIndex ][achievementIndex].rewardValue;
+				
+				calculatePointsPerSecond();
+			break;
+			
+		default:
+			console.log( 'not working' );
+			break;
+	}
+}
+
+function calculatePointsPerSecond()
+{
+	let resultValue = 0;
+	
+	for( let upgradeIndex = 0; upgradeIndex < upgrades.length; upgradeIndex++ )
+	{
+		resultValue += upgrades[ upgradeIndex ].quantity * upgrades[ upgradeIndex ].value;
+	}
+	
+	pointsPerSecond = resultValue;
 }
 
 function mainLoop()
@@ -162,6 +321,7 @@ function mainLoop()
 	
 	displayPoints();
 	displayUpgrades();
+	displayAchievements();
 }
 
 function mainClickerOnClick()
