@@ -1,6 +1,6 @@
 var gameTitle = "JS-Clicker";
 
-var pointsTotal = 1000000;
+var pointsTotal = 100;
 var pointsPerSecond = 0;
 
 var pointsPerClick = 1;
@@ -30,12 +30,21 @@ var achievements = [
 ],
 
 [
-{ id: "achievement-5", name: "achievement-5",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 0, rewardValue: 2, cost: 100, purchased: false, available: false }, 
-{ id: "achievement-6", name: "achievement-6",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 1, rewardValue: 2, cost: 200, purchased: false, available: false },
-{ id: "achievement-7", name: "achievement-7",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 2, rewardValue: 1.5, cost: 500, purchased: false, available: false }, 
-{ id: "achievement-8", name: "achievement-8",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 3, rewardValue: 1.5, cost: 10000, purchased: false, available: false },
-{ id: "achievement-9", name: "achievement-9",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 4, rewardValue: 1.5, cost: 25000, purchased: false, available: false },
-{ id: "achievement-10", name: "achievement-10",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 5, rewardValue: 1.5, cost: 50000, purchased: false, available: false },
+{ id: "achievement-5", name: "achievement-6",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 0, rewardValue: 2, cost: 100, purchased: false, available: false }, 
+{ id: "achievement-6", name: "achievement-7",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 1, rewardValue: 2, cost: 200, purchased: false, available: false },
+{ id: "achievement-7", name: "achievement-8",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 2, rewardValue: 1.5, cost: 500, purchased: false, available: false }, 
+{ id: "achievement-8", name: "achievement-9",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 3, rewardValue: 1.5, cost: 10000, purchased: false, available: false },
+{ id: "achievement-9", name: "achievement-10",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 4, rewardValue: 1.5, cost: 25000, purchased: false, available: false },
+{ id: "achievement-10", name: "achievement-11",  requirementType: "upgrade-quantity", requirementValue: 10, rewardType: "upgrade-value-multiplier", upgradeIndex: 5, rewardValue: 1.5, cost: 50000, purchased: false, available: false },
+],
+
+[
+{ id: "achievement-11", name: "achievement-12",  requirementType: "points-per-second", requirementValue: 1, rewardType: "points-total", rewardValue: 100, cost: 0, purchased: false, available: false }, 
+{ id: "achievement-12", name: "achievement-13",  requirementType: "points-per-second", requirementValue: 10, rewardType: "points-total", rewardValue: 500, cost: 0, purchased: false, available: false },
+{ id: "achievement-13", name: "achievement-14",  requirementType: "points-per-second", requirementValue: 20, rewardType: "points-total", rewardValue: 1000, cost: 0, purchased: false, available: false }, 
+{ id: "achievement-14", name: "achievement-15",  requirementType: "points-per-second", requirementValue: 50, rewardType: "points-total", rewardValue: 2000, cost: 0, purchased: false, available: false },
+{ id: "achievement-15", name: "achievement-16",  requirementType: "points-per-second", requirementValue: 100, rewardType: "points-total", rewardValue: 5000, cost: 0, purchased: false, available: false },
+{ id: "achievement-16", name: "achievement-17",  requirementType: "points-per-second", requirementValue: 200, rewardType: "points-total", rewardValue: 10000, cost: 0, purchased: false, available: false },
 ],
 
 ];

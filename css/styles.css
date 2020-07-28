@@ -1,6 +1,12 @@
+@font-face 
+{
+	font-family: Anton-Regular;
+	src: url( '../fonts/Anton-Regular.ttf' );
+}
+
 :root
 {
-	--main-color: #5A7D7C;
+	--main-color: #150015;
 	
 	--color-1: #DADFF7;
 	--color-2: #232C33;
@@ -18,12 +24,13 @@
 
 html, body
 {
-	font-family: sans-serif;
+	font-family: Anton-Regular;
 }
 
 .container
 {
-	background: var( --main-color );
+	background: url('../img/background-wood.jpg');
+	background-size: cover;
 	
 	min-width: 800px;
 	min-height: 600px;
@@ -33,26 +40,61 @@ html, body
 	
 	display: grid;
 	
-	grid-template-columns: 3fr 3fr 1fr;
-	grid-template-rows: 2fr 12fr 1fr;
-	
-	gap: 5px;
+	grid-template-columns: 12fr 12fr 0.75fr 8fr;
+	grid-template-rows: 4fr 1fr 24fr 1fr 4fr;
 }
+
 
 .top
 {
-	background: var( --color-1 );
-
 	grid-column: 1 / 4;
 	grid-row: 1;
+	
+	display: flex;
+	
+	justify-content: center;
+	
+	background: url('../img/background-wood.jpg');
+	background-size: cover;
+}
+
+#title
+{
+  
+	
+}
+
+.separator-horizontal-top
+{
+	background: url('../img/border-wood.jpg');
+	
+	grid-column: 1 / 5;
+	grid-row: 2;
+}
+
+.separator-horizontal-bottom
+{
+	background: url('../img/border-wood.jpg');
+	
+	grid-column: 1 / 5;
+	grid-row: 4;
+}
+
+.separator-vert-middle
+{
+	background: url('../img/border-wood.jpg');
+	
+    grid-row: 3;
+	grid-column: 3;
 }
 
 .main
 {
-	background: var( --color-1 );
+	background: url('../img/background-stone.jpg');
+	background-size: cover;
 	
 	grid-column: 1 / 3;
-	grid-row: 2;
+	grid-row: 3;
 	
 	position: relative;
 }
@@ -98,28 +140,60 @@ html, body
 
 #main-clicker
 {
-	background: yellow;
+	width: 128px;	
+	height: 128px;
 	
-	width: 100px;	
-	height: 100px;
+	background-size: cover;
+}
+
+#main-clicker.default
+{
+	background: url('../img/main-clicker-icon-default.png');
+}
+
+#main-clicker.tier-1
+{
+	background: url('../img/main-clicker-icon-1.png');
+}
+
+#main-clicker.tier-2
+{
+	background: url('../img/main-clicker-icon-2.png');
+}
+
+#main-clicker.tier-3
+{
+	background: url('../img/main-clicker-icon-3.png');
+}
+
+#main-clicker.tier-4
+{
+	background: url('../img/main-clicker-icon-4.png');
+}
+
+#main-clicker.tier-5
+{
+	background: url('../img/main-clicker-icon-5.png');
 }
 
 #random-clicker
 {
-	background: red;
+	background: url('../img/random-clicker-icon.png');
+	background-size: cover;
 	
-	width: 50px;	
-	height: 50px;
+	width: 64px;	
+	height: 64px;
 	
 	display: none;
 }
 
 .menu
 {
-	background: var( --color-1 );
+	background: url('../img/background-wood.jpg');
+	background-size: cover;
 	
-	grid-column: 3;
-	grid-row: 2;
+	grid-column: 4;
+	grid-row: 3;
 	
 	display: flex;
 	flex-direction: column;
@@ -130,7 +204,7 @@ html, body
 
 .achievement-container
 {
-	min-width: 250px;
+	min-width: 100%;
 	
 	display: flex;
 	flex-direction: column;
@@ -232,10 +306,11 @@ html, body
 
 .bottom
 {
-	background: var( --color-1 );
+	background: url('../img/background-wood.jpg');
+	background-size: cover;
 	
 	grid-column: 1 / 4;
-	grid-row: 3;
+	grid-row: 5;
 }
 
 .centered-horizontally
