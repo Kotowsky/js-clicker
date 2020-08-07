@@ -60,13 +60,13 @@ html, body
 
 #title
 {
-  
+  font-size: 1.7em;
 	
 }
 
 .separator-horizontal-top
 {
-	background: url('../img/border-wood.jpg');
+	background: url('../img/border-wood-90.jpg');
 	
 	grid-column: 1 / 5;
 	grid-row: 2;
@@ -74,7 +74,7 @@ html, body
 
 .separator-horizontal-bottom
 {
-	background: url('../img/border-wood.jpg');
+	background: url('../img/border-wood-90.jpg');
 	
 	grid-column: 1 / 5;
 	grid-row: 4;
@@ -101,8 +101,6 @@ html, body
 
 .main-header
 {
-	background: yellow;
-	
 	display: flex;
 	flex-direction: column;
 	
@@ -115,16 +113,20 @@ html, body
 	position: absolute;
 	
 	margin-top: 10px;
+	
 }
 
 .main-header .header-item
 {
-	background: green;
+	background: url('../img/background-parchment-header-item.jpg');
+	background-size: cover;
 	
 	margin: 5px;
 	padding: 2px;
 	
 	min-width: 25%;
+	
+    opacity: 0.8;
 }
 
 .main-header .header-item p
@@ -143,37 +145,67 @@ html, body
 	width: 128px;	
 	height: 128px;
 	
-	background-size: cover;
+
 }
 
 #main-clicker.default
 {
-	background: url('../img/main-clicker-icon-default.png');
+	background: url('../img/main-clicker-default.png');
+	background-position: center;
+	background-size: cover;
+	
+	width: 512px;
+	height: 512px;
 }
 
 #main-clicker.tier-1
 {
-	background: url('../img/main-clicker-icon-1.png');
+	background: url('../img/main-clicker-tier-1.png');
+	background-position: center;
+	background-size: cover;
+	
+	width: 512px;
+	height: 512px;
 }
 
 #main-clicker.tier-2
 {
-	background: url('../img/main-clicker-icon-2.png');
+	background: url('../img/main-clicker-tier-2.png');
+	background-position: center;
+	background-size: cover;
+	
+	width: 512px;
+	height: 512px;
 }
 
 #main-clicker.tier-3
 {
-	background: url('../img/main-clicker-icon-3.png');
+	background: url('../img/main-clicker-tier-3.png');
+	background-position: center;
+	background-size: cover;
+	
+	width: 512px;
+	height: 512px;
 }
 
 #main-clicker.tier-4
 {
-	background: url('../img/main-clicker-icon-4.png');
+	background: url('../img/main-clicker-tier-4.png');
+	background-position: center;
+	background-size: cover;
+	
+	width: 512px;
+	height: 512px;
 }
 
 #main-clicker.tier-5
 {
-	background: url('../img/main-clicker-icon-5.png');
+	background: url('../img/main-clicker-tier-5.png');
+	background-position: center;
+	background-size: cover;
+	
+	width: 512px;
+	height: 512px;
 }
 
 #random-clicker
@@ -212,6 +244,8 @@ html, body
 
 .achievement-row
 {
+	background: inherit;
+	
 	width: 100%;
 	height: auto;
 	
@@ -223,12 +257,12 @@ html, body
 	
 	flex-wrap: nowrap;
 	
-	background: yellow;
 }
 
 .achievement
 {
-	background: var(--color-3);
+	background: url('../img/background-marble-upgrade.jpg');
+	background-size: cover;
 	
 	display: none;
 	flex-direction: row;
@@ -277,7 +311,8 @@ html, body
 
 .upgrade
 {
-	background: var(--color-3);
+	background: url('../img/background-marble-upgrade.jpg');
+	background-size: cover;
 	
 	display: flex;
 	flex-direction: row;
@@ -311,6 +346,12 @@ html, body
 	
 	grid-column: 1 / 4;
 	grid-row: 5;
+	
+	display: flex;
+	
+	justify-content: center;
+	align-items: center;
+	
 }
 
 .centered-horizontally

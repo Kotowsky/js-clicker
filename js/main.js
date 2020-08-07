@@ -1,6 +1,6 @@
 var gameTitle = "JS-Clicker";
 
-var pointsTotal = 100;
+var pointsTotal = 1000000;
 var pointsPerSecond = 0;
 
 var pointsPerClick = 1;
@@ -253,6 +253,11 @@ function purchaseAchievement( achievementRowIndex, achievementIndex )
 		
 		let achievementElement = document.getElementById( achievements[ achievementRowIndex ][ achievementIndex ].id );
 		achievementElement.style.display = 'none';
+		
+		if( achievementRowIndex == 0 )
+		{
+			changeMainClickerTier( achievementIndex + 1 );
+		}
     }
 }
 
@@ -310,6 +315,13 @@ function getAchievementReward( achievementRowIndex, achievementIndex )
 			console.log( 'not working' );
 			break;
 	}
+}
+
+
+function changeMainClickerTier( clickerTier )
+{
+	let mainClicker = document.getElementById( 'main-clicker' );
+	mainClicker.className = 'clicker centered-horizontally centered-vertically tier-' + clickerTier;
 }
 
 function calculatePointsPerSecond()
